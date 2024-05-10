@@ -1,0 +1,57 @@
+﻿@model List<ResultNotificationDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Bildirim İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Bildirim Listesi</h5>
+
+                        <div class="card-sub">
+                            Bildirim ile ilgili işlemleri aşağıdan gerçekleştirebilirsiniz.
+                        </div>
+                        <hr />
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Bildirim Türü</th>
+                                    <th scope="col">Açıklama</th>
+                                    <th scope="col">Tarih</th>
+                                    <th scope="col">Durum</th>
+                                    <th scope="col">Sil</th>
+                                    <th scope="col">Güncelle</th>
+                                    <th scope="col">Okundu/Okunmadı İşaretle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    count++;
+                                    <tr>
+                                        <th scope="row">@count</th>
+                                        <td>@item.IconType</td>
+                                        <td>@item.Description</td>
+                                        <td>@item.Date.ToString("d")</td>
+                                        <td> <span class="@(item.Status ? "badge bg-success" : "badge bg-secondary")">@(item.Status ? "Okundu" : "Okunmadı")</span></td>
+                                        <td><a href="/Notifications/DeleteNotification/@item.NotificationID" class="btn btn-outline-danger">Sil</a></td>
+                                        <td><a href="/Notifications/UpdateNotification/@item.NotificationID" class="btn btn-outline-warning">Güncelle</a></td>
+                                        <td><a href="/Notifications/NotificationStatusChange/@item.NotificationID" class="@(item.Status ? "btn btn-outline-secondary" : "btn btn-outline-success")">@(item.Status ? "Okunmadı" : "Okundu")</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

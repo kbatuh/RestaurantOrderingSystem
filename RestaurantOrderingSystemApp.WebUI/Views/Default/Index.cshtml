@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/Index.cshtml";
+    var tableId = Context.Session.GetInt32("MenuTableId");
+}
+
+@await Component.InvokeAsync("_DefaultSliderComponentPartial")
+
+@await Component.InvokeAsync("_DefaultOfferComponentPartial")
+
+@await Component.InvokeAsync("_DefaultOurMenuComponentPartial")
+
+@await Component.InvokeAsync("_DefaultAboutComponentPartial")
+
+@await Html.PartialAsync("SendMessage.cshtml")
+
+@await Component.InvokeAsync("_DefaultTestimonialComponentPartial")
+
+<input type="hidden" id="menutableid" value="@tableId" />
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    var id = $("#menutableid").val();
+    (function () {
+        if (id == "") {
+            Swal.fire({
+                icon: "warning",
+                text: "QR Code okutarak masa seçimi yapmalısın!",
+                showConfirmButton: false,
+                timer: 4000
+            });
+        }
+    }());
+</script>

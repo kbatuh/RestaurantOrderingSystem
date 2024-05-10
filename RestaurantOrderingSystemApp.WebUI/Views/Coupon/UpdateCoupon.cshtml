@@ -1,0 +1,36 @@
+﻿@model UpdateCouponDto
+@{
+    ViewData["Title"] = "UpdateCoupon";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Kupon İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Kupon Güncelleme Sayfası</h5>
+
+                        <form class="row g-3" method="post">
+                            <input type="hidden" asp-for="CouponID" />
+                            <div class="col-12">
+                                <label for="CouponCode" class="form-label">Kupon Kodunu Giriniz</label>
+                                <input type="text" class="form-control" asp-for="CouponCode" id="CouponCode">
+                            </div>
+                            <div class="col-12">
+                                <label for="Amount" class="form-label">İndirim Oranını Giriniz</label>
+                                <input type="text" class="form-control" asp-for="Amount" id="Amount">
+                            </div>
+                            <div class="text-left">
+                                <button type="submit" class="btn btn-primary">Kuponu Güncelle</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

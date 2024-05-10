@@ -1,0 +1,169 @@
+﻿@{ 
+    string approved = "Rezervasyon Onaylandı";
+    string cancelled = "Rezervasyon İptal Edildi";
+}
+
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#dashboard-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-grid"></i><span>Yönetim Paneli</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="dashboard-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/Default/Index/">
+                        <i class="bi bi-circle"></i><span>Siteye Git</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/About/Index/">
+                        <i class="bi bi-circle"></i><span>Hakkımızda</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Contact/Index/">
+                        <i class="bi bi-circle"></i><span>İletişim</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Notifications/Index/">
+                        <i class="bi bi-circle"></i><span>Bildirimler</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Message/Index/">
+                        <i class="bi bi-circle"></i><span>Mesajlar</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#menutable-nav" data-bs-toggle="collapse" href="#">
+                <i class="bx bx-desktop"></i><span>Masa İşlemleri</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="menutable-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/MenuTable/Index/">
+                        <i class="bi bi-circle"></i><span>Masaları Düzenle</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/MenuTable/TableListByStatus/">
+                        <i class="bi bi-circle"></i>
+                        <span>Masa Durumları</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#booking-nav" data-bs-toggle="collapse" href="#">
+                <i class="bx bx-support"></i><span>Rezervasyon İşlemleri</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="booking-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/Booking/Index/">
+                        <i class="bi bi-circle"></i><span>Tüm Rezervasyonlar</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Booking/GetBookingListByStatusToIncoming/">
+                        <i class="bi bi-circle"></i><span>Yeni Gelen Rezervasyonlar</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Booking/GetBookingListByStatus?description=@approved">
+                        <i class="bi bi-circle"></i><span>Onaylanan Rezervasyonlar</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Booking/GetBookingListByStatus?description=@cancelled">
+                        <i class="bi bi-circle"></i><span>İptal Edilen Rezervasyonlar</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/Order/Index/">
+                <i class="bx  bxs-archive-in"></i>
+                <span>Siparişler</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/Category/Index/">
+                <i class="bi bi-diagram-3"></i>
+                <span>Kategoriler</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/Product/Index/">
+                <i class="bx bxs-package"></i>
+                <span>Ürünler</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/Discount/Index/">
+                <i class="bi bi-box-arrow-in-down"></i>
+                <span>İndirimler</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/Feature/Index/">
+                <i class="bx bx-highlight"></i>
+                <span>Öne Çıkanlar</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/Testimonial/Index/">
+                <i class="ri-share-forward-2-fill"></i>
+                <span>Referanslar</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/SocialMedia/Index/">
+                <i class=" ri-wechat-fill"></i>
+                <span>Sosyal Medya</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/Statistic/Index/">
+                <i class="bi bi-bar-chart-line"></i>
+                <span>İstatistikler</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/Mail/Index/">
+                <i class="bi bi-envelope"></i>
+                <span>Mail İşlemleri</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/QRcode/Index/">
+                <i class="bx bx-qr"></i>
+                <span>QR Kod Oluştur</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/Login/LogOut/">
+                <i class="bx bxs-exit"></i>
+                <span>Çıkış Yap</span>
+            </a>
+        </li>
+
+    </ul>
+
+</aside>

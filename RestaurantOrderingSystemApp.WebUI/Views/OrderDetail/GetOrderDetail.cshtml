@@ -1,0 +1,89 @@
+﻿@model Tuple<List<ResultOrderDetailWithProductDto>, ResultOrderWithMenuTableNameDto>
+@{
+    ViewData["Title"] = "GetOrderDetail";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Sipariş Detayı İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Sipariş Detayları</h5>
+
+                        <div class="card-sub clearfix">
+                            Sipariş Detayları ile ilgili işlemleri aşağıdan gerçekleştirebilirsiniz.
+                        </div>
+                        <hr />
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Masa Adı</th>
+                                    <th scope="col">Sipariş Tarihi</th>
+                                    <th scope="col">Toplam Fiyat</th>
+                                    <th scope="col">İndirim Miktarı</th>
+                                    <th scope="col">Son Fiyat</th>
+                                    <th scope="col">Hesap Durumu</th>
+                                    <th scope="col">Hesabı Kapat</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@Model.Item2.MenuTableName</td>
+                                    <td>@Model.Item2.OrderDate</td>
+                                    <td>@Model.Item2.TotalPrice₺</td>
+                                    <td>@Model.Item2.TotalDiscount₺</td>
+                                    <td>@Model.Item2.FinalPrice₺</td>
+                                    <td> <span class="@(Model.Item2.Status ? " badge bg-success" : "badge bg-secondary" )">@(Model.Item2.Status ? "Hesap Açık" : "Hesap Kapatıldı")</span></td>
+                                    @if (Model.Item2.Status)
+                                    {
+                                        <td> <a href="/Order/CloseAccount/@Model.Item2.OrderID?menuTableId=@Model.Item2.MenuTableID&price=@Model.Item2.FinalPrice" class="btn btn-primary">Hesabı Kapat</a></td>
+                                    }
+                                    else
+                                    {
+                                        <td> <a href="#" class="btn btn-success disabled">Sipariş Tamamlandı</a></td>
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Ürün Adı</th>
+                                    <th scope="col">Miktarı</th>
+                                    <th scope="col">Birim Fiyatı</th>
+                                    <th scope="col">Toplam Fiyatı</th>
+                                    <th scope="col">Sipariş Durumu</th>
+                                    <th scope="col">Hazırlanıyor/Gönderildi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Item1)
+                                {
+                                    <tr>
+                                        <td>@item.ProductName</td>
+                                        <td>@item.Count</td>
+                                        <td>@item.Price₺</td>
+                                        <td>@item.TotalPrice₺</td>
+                                        <td>@item.Description</td>
+                                        @if (item.Description != "Sipariş Gönderildi")
+                                        {
+                                            <td> <a href="/OrderDetail/ChangeDescription/@item.OrderDetailID?orderId=@Model.Item2.OrderID" class="@(item.Description == "Sipariş Alındı" ? "btn btn-outline-warning" : "btn btn-outline-primary")">@(item.Description == "Sipariş Alındı" ? "Siparişi Hazırla" : "Siparişi Gönder")</a></td>
+                                        }
+                                        else
+                                        {
+                                            <td> <a href="#" class="btn btn-success disabled">Sipariş Tamamlandı</a></td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

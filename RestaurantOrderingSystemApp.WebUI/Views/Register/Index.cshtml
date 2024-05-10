@@ -1,0 +1,84 @@
+﻿@model RegisterDto
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+@await Component.InvokeAsync("_LayoutHeaderComponentPartial")
+
+<body>
+
+    <main>
+        <div class="container">
+
+            <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                            <div class="card mb-0">
+
+                                <div class="card-body">
+
+                                    <div class="pb-1">
+                                        <h5 class="card-title text-center pb-0 fs-4">B | K Restoran Kayıt</h5>
+                                        <p class="text-center small">Hesap oluşturmak için kişisel bilgilerinizi girin.</p>
+                                    </div>
+
+                                    <form class="row g-3 needs-validation" novalidate method="post">
+                                        <div class="col-12">
+                                            <label for="yourName" class="form-label">Adınız</label>
+                                            <input type="text" name="name" class="form-control" id="yourName" asp-for="Name" required>
+                                            <div class="invalid-feedback">Lütfen adınızı giriniz!</div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="yourSurname" class="form-label">Soyadınız</label>
+                                            <input type="text" name="Surname" class="form-control" id="yourSurname" asp-for="Surname" required>
+                                            <div class="invalid-feedback">Lütfen soyadınızı giriniz!</div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="yourUsername" class="form-label">Kullanıcı Adınız</label>
+                                            <input type="text" name="username" class="form-control" id="yourUsername" asp-for="Username" required>
+                                            <div class="invalid-feedback">Lütfen bir kullanıcı adı seçiniz.</div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="yourEmail" class="form-label">Email Adresiniz</label>
+                                            <input type="email" name="email" class="form-control" id="yourEmail" asp-for="Email" required>
+                                            <div class="invalid-feedback">Lütfen geçerli bir Email adresi giriniz!</div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="yourPassword" class="form-label">Şifreniz</label>
+                                            <input type="password" name="password" class="form-control" id="yourPassword" asp-for="Password" required>
+                                            <div class="invalid-feedback">Lütfen şifrenizi giriniz!</div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100" type="submit">Hesap Oluştur</button>
+                                        </div>
+                                        @*<div class="col-12">
+                                            <p class="small mb-0">Bir hesabınız var mı? <a href="/Login/Index/">Giriş Yap</a></p>
+                                        </div>*@
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+    @await Component.InvokeAsync("_LayoutScriptComponentPartial")
+
+</body>
+
+</html>

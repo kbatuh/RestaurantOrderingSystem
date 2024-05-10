@@ -1,0 +1,40 @@
+﻿@model CreateTestimonialDto
+@{
+    ViewData["Title"] = "CreateTestimonial";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Müşteri Yorum İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Yeni Müşteri Yorumu Ekleme Sayfası</h5>
+
+                        <form class="row g-3" method="post">
+                            <input type="hidden" class="form-control" asp-for="ImageUrl" id="ImageUrl">
+                            <div class="col-12">
+                                <label for="Name" class="form-label">Müşteri Adını Giriniz</label>
+                                <input type="text" class="form-control" asp-for="Name" id="Name">
+                            </div>
+                            <div class="col-12">
+                                <label for="Title" class="form-label">Başlığı Giriniz</label>
+                                <input type="text" class="form-control" asp-for="Title" id="Title">
+                            </div>
+                            <div class="col-12">
+                                <label for="Comment" class="form-label">Müşteri Yorumunu Giriniz</label>
+                                <textarea rows="5" class="form-control" asp-for="Comment" id="Comment"></textarea>
+                            </div>
+                            <div class="text-left">
+                                <button type="submit" class="btn btn-primary">Yorumu Kaydet</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,6 @@
+{
+    "type": "commonjs",
+    "dependencies": {
+        "commonjs": "^0.0.1"
+    }
+}

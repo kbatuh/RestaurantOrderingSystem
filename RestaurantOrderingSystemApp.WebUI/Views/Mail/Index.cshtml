@@ -1,0 +1,48 @@
+﻿
+@model CreateMailDto
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Mail Sayfası </h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Mail Gönderme Paneli</h5>
+
+                        <form class="row g-3" method="post">
+                            <div class="col-12">
+                                <label for="ReceiverMail" class="form-label">Alıcı Mail Adresi</label>
+                                <input type="text" class="form-control" asp-for="ReceiverMail" id="ReceiverMail">
+                            </div>
+
+                            <div class="col-12">
+                                <label for="Subject" class="form-label">Konu</label>
+                                <input type="text" class="form-control" asp-for="Subject" id="Subject">
+                            </div>
+                            <div class="col-12">
+                                <label for="Body" class="form-label">Mesajınız</label>
+                                <textarea rows="5" asp-for="Body" id="Body" class="form-control"></textarea>
+                            </div>
+                         
+                            <div class="text-left">
+                                <button type="submit" class="btn btn-primary">Maili Gönder</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

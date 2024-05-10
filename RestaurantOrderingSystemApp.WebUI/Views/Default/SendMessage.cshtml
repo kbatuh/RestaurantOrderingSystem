@@ -1,0 +1,60 @@
+﻿@model CreateMessageDto
+<section class="book_section layout_padding">
+    <div class="container">
+        <div class="heading_container">
+            <h2>
+                Bize Ulaşın
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form_container">
+                    <form method="post" asp-action="SendMessage" asp-controller="Default">
+                        
+                        <div>
+                            <input id="name" type="text" class="form-control" placeholder="Adınız Soyadınız" asp-for="NameSurname" />
+                        </div>
+                        <div>
+                            <input id="phone" type="text" class="form-control" placeholder="Telefon Numaranız" asp-for="Phone" />
+                        </div>
+                        <div>
+                            <input id="email" type="email" class="form-control" placeholder="E-mail Adresiniz" asp-for="Mail" />
+                        </div>
+                        <div>
+                            <input id="text" type="text" class="form-control" placeholder="Konu" asp-for="Subject" />
+                        </div>
+                        <div>
+                            <textarea asp-for="MessageContent" rows="12" placeholder="Burayı Mesajınızı Yazabilirsiniz..." class="form-control"></textarea>
+                        </div>
+                    
+                        <div class="btn_box">
+                            <button onclick="showAlert()">
+                               Mesajı Gönder
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="map_container ">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3064.763989166753!2d32.573047100000004!3d39.8122855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d317c8b60e972f%3A0x87a7f90591f24baa!2sYukar%C4%B1yurt%C3%A7u%2C%20Turkuaz%20TOK%C4%B0%20Konutlar%C4%B1%2C%2006815%20Etimesgut%2FAnkara!5e0!3m2!1str!2str!4v1714942826727!5m2!1str!2str" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    function showAlert() {
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Mesajınız Başarıyla Kaydedildi",
+            showConfirmButton: false,
+            timer: 3000
+        });
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

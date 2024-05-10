@@ -1,0 +1,61 @@
+﻿@model List<ResultMessageDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Mesaj İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Mesaj Listesi</h5>
+
+                        <div class="card-sub">
+                            Mesajlar ile ilgili işlemleri aşağıdan gerçekleştirebilirsiniz.
+                        </div>
+                        <hr />
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Ad Soyad</th>
+                                    <th scope="col">Email Adresi</th>
+                                    <th scope="col">Konu</th>
+                                    <th scope="col">Mesaj İçeriği</th>
+                                    <th scope="col">Durum</th>
+                                    <th scope="col">Sil</th>
+                                    <th scope="col">Güncelle</th>
+                                    <th scope="col">Cevap Yaz</th>
+                                    <th scope="col">Okundu/Okunmadı İşaretle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    count++;
+                                    <tr>
+                                        <th scope="row">@count</th>
+                                        <td>@item.NameSurname</td>
+                                        <td>@item.Mail</td>
+                                        <td>@item.Subject</td>
+                                        <td>@item.MessageContent</td>
+                                        <td> <span class="@(item.Status ? "badge bg-success" : "badge bg-secondary")">@(item.Status ? "Okundu" : "Okunmadı")</span></td>
+                                        <td><a href="/Message/DeleteMessage/@item.MessageID" class="btn btn-outline-danger">Sil</a></td>
+                                        <td><a href="/Message/UpdateMessage/@item.MessageID" class="btn btn-outline-warning">Güncelle</a></td>
+                                        <td><a href="/Mail/Index" class="btn btn-outline-primary">Cevap</a></td>
+                                        <td><a href="/Message/MessageStatusChange/@item.MessageID" class="@(item.Status ? "btn btn-outline-secondary" : "btn btn-outline-success")">@(item.Status ? "Okunmadı" : "Okundu")</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

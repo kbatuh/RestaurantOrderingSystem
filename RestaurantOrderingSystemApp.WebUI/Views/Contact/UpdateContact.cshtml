@@ -1,0 +1,60 @@
+﻿@model UpdateContactDto
+@{
+    ViewData["Title"] = "UpdateContact";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Ana Sayfa İletişim Bilgi İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">İletişim Yazısı Güncelleme Sayfası</h5>
+
+                        <form class="row g-3" method="post">
+                            <input type="hidden" asp-for="ContactID" />
+                            <div class="col-12">
+                                <label for="Location" class="form-label">Lokasyonu Giriniz</label>
+                                <input type="text" class="form-control" asp-for="Location" id="Location">
+                            </div>
+                            <div class="col-12">
+                                <label for="Phone" class="form-label">Telefon Numarası Giriniz</label>
+                                <input type="text" class="form-control" asp-for="Phone" id="Phone">
+                            </div>
+                            <div class="col-12">
+                                <label for="Mail" class="form-label">Mail Adresi Giriniz</label>
+                                <input type="email" class="form-control" asp-for="Mail" id="Mail">
+                            </div>
+                            <div class="col-12">
+                                <label for="FooterTitle" class="form-label">Alt Başlık</label>
+                                <input type="text" class="form-control" asp-for="FooterTitle" id="FooterTitle">
+                            </div>
+                            <div class="col-12">
+                                <label for="FooterDescription" class="form-label">Alt Açıklama Alanı</label>
+                                <textarea rows="5" class="form-control" asp-for="FooterDescription" id="FooterDescription"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="OpenDays" class="form-label">Açık Günler</label>
+                                <input type="text" class="form-control" asp-for="OpenDays" id="OpenDays">
+                            </div>
+                            <div class="col-12">
+                                <label for="OpenDaysDescription" class="form-label">Açık Günler Açıklama</label>
+                                <input type="text" class="form-control" asp-for="OpenDaysDescription" id="OpenDaysDescription">
+                            </div>
+                            <div class="col-12">
+                                <label for="OpenHours" class="form-label">Açık Saatler</label>
+                                <input type="text" class="form-control" asp-for="OpenHours" id="OpenHours">
+                            </div>
+                            <div class="text-left">
+                                <button type="submit" class="btn btn-primary">İletişim Bilgi Yazısını Güncelle</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

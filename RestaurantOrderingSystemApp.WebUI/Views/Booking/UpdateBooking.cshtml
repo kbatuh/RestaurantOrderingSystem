@@ -1,0 +1,49 @@
+﻿@model UpdateBookingDto
+@{
+    ViewData["Title"] = "UpdateBooking";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Rezervasyon İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Rezervasyon Güncelleme Sayfası</h5>
+
+                        <form class="row g-3" method="post">
+                            <input type="hidden" asp-for="BookingID" />
+                            <input type="hidden" asp-for="Description" />
+                            <div class="col-12">
+                                <label for="Name" class="form-label">Ad Soyad</label>
+                                <input type="text" class="form-control" asp-for="Name" id="Name">
+                            </div>
+                            <div class="col-12">
+                                <label for="Phone" class="form-label">Telefon</label>
+                                <input type="text" class="form-control" asp-for="Phone" id="Phone">
+                            </div>
+                            <div class="col-12">
+                                <label for="Mail" class="form-label">Mail Adresi</label>
+                                <input type="email" class="form-control" asp-for="Mail" id="Mail">
+                            </div>
+                            <div class="col-12">
+                                <label for="PersonCount" class="form-label">Kişi Sayısı</label>
+                                <input type="number" class="form-control" asp-for="PersonCount" id="PersonCount">
+                            </div>
+                            <div class="col-12">
+                                <label for="Date" class="form-label">Rezervasyon Tarihi</label>
+                                <input type="date" class="form-control" asp-for="Date" id="Date">
+                            </div>
+                            <div class="text-left">
+                                <button type="submit" class="btn btn-primary">Rezervasyonu Güncelle</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

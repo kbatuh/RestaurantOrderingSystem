@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
+<div class="content">
+    <div class="container-fluid">
+        <script type="text/javascript">
+            $(document).ready(() => {
+                var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7282/SignalRHub").build();
+                connection.start().then(() => {
+                    setInterval(() => {
+                        connection.invoke("GetOrderList");
+                    }, 1000);
+                }).catch((err) => { console.log(err) });
+
+                connection.on("ReceiveOrderList", (value) => {
+                    console.log(value);
+                    let tablehtml = `<table class="table"><thead>
+                                                <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Masa Adı</th>
+                                                <th scope="col">Sipariş Tarihi</th>
+                                                <th scope="col">Son Fiyat</th>
+                                                <th scope="col">Hesap Durumu</th>
+                                                <th scope="col">Hesabı Kapat</th>
+                                                <th scope="col">Sipariş Detayı</th>
+                                                <th scope="col">Sil</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>`
+                    $.each(value, (index, item) => {
+                        let statusDisabled = "";
+                        if (!item.status) {
+                            statusDisabled = "disabled";
+                        }
+                        let dateTime = item.orderDate.split('-');
+                        console.log(dateTime);
+                        let date = dateTime[1] + "/" + dateTime[2].slice(0, 2) + "/" + dateTime[0] + " - " + dateTime[2].slice(3, 8);
+                        tablehtml += `<tr>
+                                        <th scope="row">${index + 1}</th>
+                                        <td>${item.menuTableName}</td>
+                                        <td>${date}</td>
+                                        <td>${item.finalPrice}₺</td>
+                                        <td> <span class="${(item.status ? "badge bg-success" : "badge bg-secondary")}">${(item.status ? "Hesap Açık" : "Hesap Kapatıldı")}</span></td>
+                                        <td><a href="/Order/CloseAccount/${item.orderID}?menuTableId=${item.menuTableID}&price=${item.finalPrice}" class="btn btn-outline-primary ${statusDisabled}">Hesabı Kapat</a></td>
+                                        <td><a href="/OrderDetail/GetOrderDetail/${item.orderID}" class="btn btn-outline-warning">Sipariş Detayı</a></td>
+                                        <td><a href="/Order/DeleteOrder/${item.orderID}" class="btn btn-outline-danger">Sil</a></td>
+                                        </tr>`
+                    });
+                    tablehtml += "</tbody></table>";
+                    $("#orderList").html(tablehtml);
+                });
+
+            });
+        </script>
+
+        <h4 class="page-title">Sipariş İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Tüm Siparişler</h5>
+
+                        <div class="card-sub clearfix">
+                            Sipariş ile ilgili işlemleri aşağıdan gerçekleştirebilirsiniz.
+                        </div>
+                        <hr />
+                        <div id="orderList"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

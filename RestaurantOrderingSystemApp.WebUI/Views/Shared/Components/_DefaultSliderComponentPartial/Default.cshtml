@@ -1,0 +1,58 @@
+﻿@model List<ResultFeatureDto>
+
+
+
+<section class="slider_section ">
+    <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @foreach (var item in Model)
+            {
+                <div id="crslitem" class="carousel-item">
+                    <div class="container ">
+                        <div class="row">
+                            <div class="col-md-7 col-lg-6 ">
+                                <div class="detail-box">
+                                    <h1>
+                                        @item.Title
+                                    </h1>
+                                    <p>
+                                        @item.Description
+                                    </p>
+                                    <div class="btn-box">
+                                        <a href="/Menu/Index/" class="btn1">
+                                            Sipariş Ver
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-lg-6 ">
+                                <img style="height: 55vh; width: 90vh; border-radius: 25px;" src="~/@item.ImageUrl" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="container">
+            <ol class="carousel-indicators">
+                @for (int say = 0; say < Model.Count; say++)
+                {
+                    <li id="crsl-@say" data-target="#customCarousel1" data-slide-to="@say" class=""></li>
+                }
+            </ol>
+        </div>
+    </div>
+
+</section>
+</div>
+
+<script src="~/feane-1.0.0/js/jquery-3.4.1.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
+<script type="text/javascript">
+    (function () {
+        $("#crslitem").addClass("active");
+        $("#crsl-0").addClass("active");
+    }());
+</script>

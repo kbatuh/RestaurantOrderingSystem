@@ -1,0 +1,220 @@
+﻿<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(() => {
+        var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7282/SignalRHub").build();
+        connection.start().then(() => {
+            setInterval(() => {
+                connection.invoke("SendNotification");
+            }, 1000);
+        }).catch((err) => { console.log(err) });
+
+        connection.on("ReceiveNotificationCountByFalse", (value) => {
+            $("#notificationcount").text(value);
+            $("#noticount").text(value);
+        });
+        connection.on("ReceiveNotificationListByFalse", (value) => {
+            console.log(value);
+            let tablehtml = ``;
+            let iconClass;
+            $.each(value, (index, item) => {
+                if (item.iconType == "Sipariş") {
+                    iconClass = "ri-menu-add-fill text-warning"; // Yeni Sipariş
+                }
+                else if (item.iconType == "Yorum") {
+                    iconClass = "bi bi-chat-left-text text-success"; // Yeni Yorum
+                }
+                else if (item.iconType == "Rezervasyon") {
+                    iconClass = "bx bx-support text-primary"; // Yeni Rezervasyon
+                }
+
+                let dateTime = item.date.split('-');
+                let date = dateTime[1] + "/" + dateTime[2].slice(0, 2) + "/" + dateTime[0] + " - " + dateTime[2].slice(3, 8);
+                tablehtml += ` <li class="notification-item">
+                                    <i class="${iconClass}"></i>
+                                    <div>
+                                        <p>${item.description}</p>
+                                        <p>${date}</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>`;
+
+            });
+            $("#notificationlist").html(tablehtml);
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(() => {
+        var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7282/SignalRHub").build();
+        connection.start().then(() => {
+            setInterval(() => {
+                connection.invoke("SendMessageUI");
+            }, 1000);
+        }).catch((err) => { console.log(err) });
+
+        connection.on("ReceiveMessageCountByFalse", (value) => {
+            $("#messagecount").text(value);
+            $("#messcount").text(value);
+        });
+        connection.on("ReceiveMessageListByFalse", (value) => {
+            console.log(value);
+            let tablehtml = ``;
+            $.each(value, (index, item) => {
+
+                let dateTime = item.messageSendDate.split('-');
+                let date = dateTime[1] + "/" + dateTime[2].slice(0, 2) + "/" + dateTime[0] + " - " + dateTime[2].slice(3, 8);
+                tablehtml += ` <li class="message-item">
+                                <a href="javascript:void(0)">
+                                    <img src="/images/message_profile.png" alt="" class="rounded-circle">
+                                    <div>
+                                        <h4>${item.nameSurname}</h4>
+                                        <p>${item.subject}</p>
+                                        <p>${date}</p>
+                                    </div>
+                                 </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>`;
+
+            });
+            $("#messagelist").html(tablehtml);
+        });
+    });
+</script>
+
+
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="/ProgressBars/Index/" class="logo d-flex align-items-center">
+            <img src="~/NiceAdmin/assets/img/logo.png" alt="">
+            <span class="d-none d-lg-block">Admin</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+        <form class="search-form d-flex align-items-center" method="POST" action="#">
+            <input type="text" name="query" placeholder="Aranacak Kelime">
+            <button type="submit" title="Ara"><i class="bi bi-search"></i></button>
+        </form>
+    </div><!-- End Search Bar -->
+
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+
+            <li class="nav-item d-block d-lg-none">
+                <a class="nav-link nav-icon search-bar-toggle " href="#">
+                    <i class="bi bi-search"></i>
+                </a>
+            </li><!-- End Search Icon-->
+
+            <li class="nav-item dropdown">
+
+                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                    <i class="bi bi-bell"></i>
+                    <span class="badge bg-primary badge-number" id="notificationcount"></span>
+                </a><!-- End Notification Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                    <li class="dropdown-header">
+                        <strong id="noticount"></strong> yeni bildiriminiz var
+                        <a href="/Notifications/AllNotificationStatusesChangeToTrue/"><span class="badge rounded-pill bg-primary p-2 ms-2">Tümünü Okundu Olarak İşaretle</span></a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <ul id="notificationlist"></ul>
+                    </li>
+
+                    <li class="dropdown-footer">
+                        <a href="/Notifications/Index/">Tüm bildirimleri görüntüle</a>
+                    </li>
+
+                </ul><!-- End Notification Dropdown Items -->
+
+            </li><!-- End Notification Nav -->
+
+            <li class="nav-item dropdown">
+
+                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                    <i class="bi bi-chat-left-text"></i>
+                    <span class="badge bg-success badge-number" id="messagecount"></span>
+                </a><!-- End Messages Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                    <li class="dropdown-header">
+                        <strong id="messcount"></strong> yeni mesajınız var
+                        <a href="/Message/AllMessageStatusesChangeToTrue/"><span class="badge rounded-pill bg-primary p-2 ms-2">Tümünü Okundu Olarak İşaretle</span></a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <ul id="messagelist"></ul>
+                    </li>
+                    <li class="dropdown-footer">
+                        <a href="/Message/Index/">Tüm mesajları görüntüle</a>
+                    </li>
+
+                </ul><!-- End Messages Dropdown Items -->
+
+            </li><!-- End Messages Nav -->
+
+            <li class="nav-item dropdown pe-3">
+
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <img src="~/images/user_profile.png" alt="Profile" class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-2">@Context.Session.GetString("Name")</span>
+                </a><!-- End Profile Iamge Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li class="dropdown-header">
+                        <h6>@Context.Session.GetString("Name") @Context.Session.GetString("Surname")</h6>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="/Setting/Index/">
+                            <i class="bi bi-gear"></i>
+                            <span>Hesap Ayarları</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="/Register/Index/">
+                            <i class="bi bi-question-circle"></i>
+                            <span>Yeni Kullanıcı Ekle</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="/Login/LogOut/">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Çıkış Yap</span>
+                        </a>
+                    </li>
+
+                </ul><!-- End Profile Dropdown Items -->
+            </li><!-- End Profile Nav -->
+
+        </ul>
+    </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->

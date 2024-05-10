@@ -1,0 +1,20 @@
+﻿--CategoryCount
+--ProductCount
+
+--ActiveCategoryCount
+--PassiveCategoryCount
+
+--ProductCountByDrink1
+--ProductCountByDrink2
+
+--Ortalama Fiyat
+--En Yüksek Fiyatlı Ürün
+--En Düşük Fiyatlı Ürün
+--Ortalama Tatlı Fiyatı
+
+--Toplam Sipariş Sayısı
+--Aktif Sipariş Sayısı
+--Son Sipariş Tutarı
+--Kasadaki Tutar
+--Bugünkü kazanç
+--Masa Sayısı

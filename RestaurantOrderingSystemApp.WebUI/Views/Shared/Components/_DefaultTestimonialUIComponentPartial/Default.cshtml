@@ -1,0 +1,50 @@
+﻿@model CreateTestimonialDto
+<section class="book_section layout_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="heading_container">
+                    <h2>
+                        Müşteri Yorum Bölümü
+                    </h2>
+                </div>
+                <div class="form_container">
+                    <form action="/TestimonialUI/Index/" method="post">
+                        <input type="hidden" asp-for="ImageUrl" />
+                        <div>
+                            <input id="name" type="text" class="form-control" placeholder="Adınız Soyadınız" asp-for="Name" />
+                        </div>
+                        <div>
+                            <input id="title" type="text" class="form-control" placeholder="Başlık" asp-for="Title" />
+                        </div>
+                        <div>
+                            <textarea asp-for="Comment" rows="3" placeholder="Buraya Yorumunuzu Yazabilirsiniz..." class="form-control"></textarea>
+                        </div>
+                        <div class="btn_box">
+                            <button onclick="showAlert()">
+                                Müşteri Yorumu Oluştur
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img style="height: 55vh; width: 90vh; border-radius: 25px;" src="~/images/comment.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function showAlert() {
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Yorumunuz Başarıyla Kaydedildi",
+            showConfirmButton: false,
+            timer: 3000
+        });
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

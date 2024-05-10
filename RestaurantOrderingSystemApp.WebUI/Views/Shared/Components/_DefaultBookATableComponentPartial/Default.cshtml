@@ -1,0 +1,79 @@
+﻿@model CreateBookingDto
+<section class="book_section layout_padding">
+    <div class="container">
+        <div class="heading_container">
+            <h2>
+               Rezervasyon Bölümü 
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form_container">
+                    <form action="/BookATable/Index/" method="post">
+                        <input type="hidden" asp-for="Description" />
+                        <div>
+                            <input id="name" type="text" class="form-control" placeholder="Adınız Soyadınız" asp-for="Name" />
+                        </div>
+                        <div>
+                            <input id="phone" type="text" class="form-control" placeholder="Telefon Numaranız" asp-for="Phone" />
+                        </div>
+                        <div>
+                            <input id="email" type="email" class="form-control" placeholder="E-mail Adresiniz" asp-for="Mail" />
+                        </div>
+                        <div>
+                            <select id="personcount" asp-for="PersonCount" class="form-control nice-select wide">
+                                <option value="" disabled selected>
+                                   Kaç kişilik rezervasyon oluşturmak istersiniz?
+                                </option>
+                                <option value="1">
+                                    1
+                                </option>
+                                <option value="2">
+                                    2
+                                </option>
+                                <option value="3">
+                                    3
+                                </option>
+                                <option value="4">
+                                    4
+                                </option>
+                                <option value="5">
+                                    5
+                                </option>
+                                <option value="6">
+                                    6+
+                                </option>
+                            </select>
+                        </div>
+                        <div>
+                            <input id="date" type="date" class="form-control" asp-for="Date">
+                        </div>
+                        <div class="btn_box">
+                            <button onclick="showAlert()">
+                                Rezervasyon Oluştur
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img style="height: 55vh; width: 90vh; border-radius: 25px;" src="~/images/bookatable.jpg" alt="">
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    function showAlert() {
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Rezervasyonunuz Başarıyla Kaydedildi",
+            showConfirmButton: false,
+            timer: 3000
+        });
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

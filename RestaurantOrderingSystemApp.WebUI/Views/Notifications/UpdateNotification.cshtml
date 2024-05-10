@@ -1,0 +1,54 @@
+﻿@model UpdateNotificationDto
+@{
+    ViewData["Title"] = "UpdateNotification";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Bildirim İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <input type="hidden" asp-for="NotificationID" />
+                        <input type="hidden" asp-for="Date" />
+                        <div class="card-header">
+                            <div class="card-title">Bildirim Güncelleme Sayfası</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="IconType">Bildiri Türü </label>
+                                <select id="IconType" asp-for="IconType" class="form-control nice-select wide">
+                                    <option value="" disabled selected>
+                                        Bildiri türü seçer misiniz?
+                                    </option>
+                                    <option value="Sipariş">
+                                        Sipariş
+                                    </option>
+                                    <option value="Yorum">
+                                        Yorum
+                                    </option>
+                                    <option value="Rezervasyon">
+                                        Rezervasyon
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="Description">Açıklama</label>
+                                <input type="text" class="form-control" asp-for="Description" id="Description">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <button class="btn btn-success">Bildirim Güncelle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
