@@ -361,3 +361,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/RestaurantOrderingSystemApp.WebUI/.config/dotnet-tools.json
