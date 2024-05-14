@@ -14,10 +14,8 @@ namespace RestaurantOrderingSystemApp.DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=.; Database=RestaurantOrderingSystemDb; Trusted_Connection=true; TrustServerCertificate=True;");
-            //optionsBuilder.UseNpgsql("UserID = postgres; Password = 159357; Host = localhost; Port = 5432; Database = RestaurantOrderingSystemDb; Pooling = true;");
-
         }
+
         public DbSet <About> Abouts { get; set; }
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<Booking> Bookings { get; set; }

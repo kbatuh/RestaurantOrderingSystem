@@ -1,31 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using RestaurantOrderingSystemApp.BusinessLayer.Abstract;
+using RestaurantOrderingSystemApp.EntityLayer.Entities;
 using RestaurantOrderingSystemApp.WebUI.Dtos.AboutDtos;
 using RestaurantOrderingSystemApp.WebUI.Services;
 using System.Text;
 
 namespace RestaurantOrderingSystemApp.WebUI.Controllers
 {
-    public class AboutController : Controller
+    public class AboutController(IHttpClientFactory _httpClientFactory, IAboutService _aboutService) : Controller
     {
-        private readonly IHttpClientFactory _httpClientFactory;
-
-        public AboutController(IHttpClientFactory httpClientFactory)
-        {
-            _httpClientFactory = httpClientFactory;
-        }
-
         public async Task<IActionResult> Index()
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7282/api/About");
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultAboutDto>>(jsonData);
-                return View(values);
-            }
-            return View();
+            var values = _aboutService.TGetListAll();
+
+            return View(values);
         }
 
         [HttpGet]
@@ -37,15 +26,20 @@ namespace RestaurantOrderingSystemApp.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAbout(CreateAboutDto createAboutDto, IFormFile formFile)
         {
-            createAboutDto.ImageUrl = FileService.Upload(formFile);
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(createAboutDto);
-            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7282/api/About", stringContent);
-            if (responseMessage.IsSuccessStatusCode)
+            About about = new About()
+            {
+                Title = createAboutDto.Title,
+                Description = createAboutDto.Description,
+                ImageUrl = createAboutDto.ImageUrl,
+            };
+
+            _aboutService.TAdd(about);
+
+            if (about.AboutID > 0)
             {
                 return RedirectToAction("Index");
             }
+
             return View();
         }
 
@@ -81,7 +75,7 @@ namespace RestaurantOrderingSystemApp.WebUI.Controllers
             {
                 updateAboutDto.ImageUrl = FileService.Upload(formFile);
             }
-            
+
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateAboutDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");

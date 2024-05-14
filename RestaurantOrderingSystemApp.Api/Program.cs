@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using RestaurantOrderingSystemApp.Api.Hubs;
 using RestaurantOrderingSystemApp.BusinessLayer.Abstract;
 using RestaurantOrderingSystemApp.BusinessLayer.Concrete;
@@ -25,7 +26,7 @@ builder.Services.AddCors(opt =>
 
 builder.Services.AddSignalR();
 
-builder.Services.AddDbContext<RestaturantOrderingSystemContext>();
+builder.Services.AddDbContext<RestaturantOrderingSystemContext>(options => options.UseSqlServer(builder.Configuration.GetValue<string>("MssqlDbSettings:ConnectionString")), ServiceLifetime.Scoped);
 //AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -40,9 +41,9 @@ builder.Services.AddScoped<ICategoryService, CategoryManager>();
 builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
 
 builder.Services.AddScoped<IContactService, ContactManager>();
-builder.Services.AddScoped<IContactDal, EfContactDal > ();
+builder.Services.AddScoped<IContactDal, EfContactDal>();
 
-builder.Services.AddScoped<IDiscountService,DiscountManager>();
+builder.Services.AddScoped<IDiscountService, DiscountManager>();
 builder.Services.AddScoped<IDiscountDal, EfDiscountDal>();
 
 builder.Services.AddScoped<IFeatureService, FeatureManager>();
